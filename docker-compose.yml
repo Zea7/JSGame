@@ -26,6 +26,7 @@ services:
       - 5173:5173
     volumes:
       - ./client:/app
+      - /app/node_modules
     command: npm run dev -- --port 5173 --host 0.0.0.0
   
   dev-client-2:
@@ -41,4 +42,5 @@ services:
       - 5174:5174
     volumes:
       - ./client:/app
-    command: npm run dev -- --port 5173 --host 0.0.0.0
+      - /app/node_modules 
+    command: npm run dev -- --port 5174 --host 0.0.0.0
