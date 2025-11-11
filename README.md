@@ -11,6 +11,15 @@ docker compose up -d
 ```   
 를 이용해 dev server와 dev client 두 개를 띄울 수 있다.  
 
+처음 사용자의 경우,  
+권한 문제 해결을 위해 UID와 GID를 덮어 쓰게 되어 있으므로   
+
+```   
+chmod +x start.sh  
+./start.sh  
+```   
+를 통해 .env 파일을 생성하고 권한을 옮기면 된다.   
+
 브라우저를 통해 localhost:5173~5174로 두 개의 client를 바로 띄울 수 있으며   
 사용하는 커널의 유저와 gid를 그대로 가져가기 때문에 permission 문제 없이   
 volume으로 연결된 client 코드 수정이 바로 적용이 됨.  

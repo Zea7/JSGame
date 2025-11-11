@@ -1,7 +1,6 @@
 FROM node:24-alpine
 
 WORKDIR /app
-COPY package*.json /app
 
 ARG USERNAME
 ARG UID
@@ -18,7 +17,8 @@ RUN deluser node && \
 RUN apk add --no-cache sudo bash \
     && echo "$USERNAME ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
+RUN chown -R $USERNAME:$USERNAME /app
+
 USER $USERNAME
 
 ENV NODE_ENV=development
-RUN npm install

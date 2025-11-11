@@ -5,13 +5,14 @@ services:
       dockerfile: Dockerfile
       args:
         USERNAME: ${USER}
-        UID: "$$(id -u)"
-        GID: "$$(id -g)"
+        UID: ${UID}
+        GID: ${GID}
     container_name: jsgame_server
     ports:
       - 3000:3000
     volumes:
       - ./server:/app
+    command: npm install
   
   dev-client-1:
     build:
@@ -19,14 +20,14 @@ services:
       dockerfile: Dockerfile
       args:
         USERNAME: ${USER}
-        UID: "$$(id -u)"
-        GID: "$$(id -g)"
+        UID: ${UID}
+        GID: ${GID}
     container_name: jsgame_client_fst
     ports:
       - 5173:5173
     volumes:
       - ./client:/app
-    command: npm run dev -- --port 5173 --host 0.0.0.0
+    command: sh -c "npm install && npm run dev -- --port 5173 --host 0.0.0.0"
   
   dev-client-2:
     build:
@@ -34,11 +35,11 @@ services:
       dockerfile: Dockerfile
       args:
         USERNAME: ${USER}
-        UID: "$$(id -u)"
-        GID: "$$(id -g)"
+        UID: ${UID}
+        GID: ${GID}
     container_name: jsgame_client_snd
     ports:
       - 5174:5174
     volumes:
       - ./client:/app
-    command: npm run dev -- --port 5173 --host 0.0.0.0
+    command: sh -c "npm install && npm run dev -- --port 5173 --host 0.0.0.0"
